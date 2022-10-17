@@ -23,3 +23,13 @@
   - npm run dev : 개발환경 실행
   - npm run build : 배포파일 생성
   - npm run start : 서비스 시작
+
+### Next.js 페이지 생성하기
+
+<hr>
+
+`pages 폴더 내에 폴더 또는 파일을 추가하여 원하는 경로의 페이지를 추가`
+
+- pages폴더 하부에 posts 폴더를 추가한 후 그 내부에 first-post.js 파일을 추가하면 기본 url(localhost:3000/)에 추가적으로 /post/first-post 페이지가 추가된다.
+
+- post 폴더 내부에 index.js 파일을 생성하게되면 /post 경로의 페이지가 생성된다
