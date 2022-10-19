@@ -1,15 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "./layout.module.css";
-import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import styled from "styled-components";
 
-const name = "Your Name";
+const name = "dogsocks";
 export const siteTitle = "Next.js Sample Website";
 
 export default function Layout({ children, home }) {
   return (
-    <div className={styles.container}>
+    <LayoutContainer>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -25,49 +24,89 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
+      <LayoutHeader>
         {home ? (
           <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=""
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <ImageWrapper>
+              <Image
+                priority
+                src="/images/profile.jpg"
+                height={144}
+                width={144}
+                alt=""
+              />
+            </ImageWrapper>
+            <Heading2Xl>{name}</Heading2Xl>
           </>
         ) : (
           <>
             <Link href="/">
               <a>
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt=""
-                />
+                <ImageWrapper>
+                  <Image
+                    priority
+                    src="/images/profile.jpg"
+                    height={108}
+                    width={108}
+                    alt=""
+                  />
+                </ImageWrapper>
               </a>
             </Link>
-            <h2 className={utilStyles.headingLg}>
+            <HeadingLg>
               <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+                <ColorInherit>{name}</ColorInherit>
               </Link>
-            </h2>
+            </HeadingLg>
           </>
         )}
-      </header>
+      </LayoutHeader>
       <main>{children}</main>
       {!home && (
-        <div className={styles.backToHome}>
+        <BackToHome>
           <Link href="/">
             <a>← Back to home</a>
           </Link>
-        </div>
+        </BackToHome>
       )}
-    </div>
+    </LayoutContainer>
   );
 }
+
+const LayoutContainer = styled.div`
+  max-width: 36rem;
+  padding: 0 1rem;
+  margin: 3rem auto 6rem;
+`;
+
+const LayoutHeader = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const BackToHome = styled.div`
+  margin: 3rem 0 0;
+`;
+
+const Heading2Xl = styled.h1`
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.05rem;
+  margin: 1rem 0;
+`;
+
+const HeadingLg = styled.h2`
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin: 1rem 0;
+`;
+
+const ImageWrapper = styled.div`
+  border-radius: 9999px;
+`;
+
+const ColorInherit = styled.a`
+  color: inherit;
+`;
