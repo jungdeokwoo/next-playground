@@ -2,6 +2,8 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import styled from "styled-components";
 import { getSortedPostsData } from "../lib/posts";
+import Link from "next/link";
+import Date from "../components/date";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -28,11 +30,13 @@ export default function Home({ allPostsData }) {
         <ListWrapper>
           {allPostsData.map(({ id, date, title }) => (
             <ListItem key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <DateWrapper>
+                <Date dateString={date} />
+              </DateWrapper>
             </ListItem>
           ))}
         </ListWrapper>
@@ -66,4 +70,8 @@ const ListWrapper = styled.ul`
 
 const ListItem = styled.li`
   margin: 0 0 1.25rem;
+`;
+
+const DateWrapper = styled.small`
+  color: #666;
 `;
