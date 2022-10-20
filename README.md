@@ -94,3 +94,16 @@
   - fallback 속성이 true 일때는 지정된 페이지를 띄워준다.
 - useRouter 을 통해서 해당페이지의 route 정보를 확인 할 수 있다.(`const router = useRouter()`)
 - pages 폴더내에 404.js파일을 생성하면 404에러경우에 이동할 페이지를 편집할 수 있다.
+
+  <br/>
+  <br/>
+
+### **Nested Routing**
+
+<hr>
+
+`pages 폴더내에 하위 폴더를 만든 후 [id].js 가 아닌 [폴더명]으로 추가적인 nesting을 할 수 있다.`
+
+- pages 폴더내부에 product라는 폴더를 만들고 index.js파일을 생성하면 /product 페이지에 접근할 수 있다.
+- product 폴더 내부에 [productId]라는 폴더를 만들고 index.js파일을 만들어주면 index.js파일에 해당하는 내용을 /product/[productId]페이지에 나타내어진다.
+- [productId] 폴더 내부에 추가적인 폴더를 만들면 해당폴더내에 [id].js 파일을 작성해주면 /product/[productId]/'폴더명'/[id] 페이지로 접근할 수 있다.
