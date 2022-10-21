@@ -119,3 +119,24 @@
 - [...파일명].js 의 경우 모든 경로에서 useRouter 를 사용해서 페이지 정보를 가져올때 query는 배열값이 들어가게 된다. ('/폴더명/a/b' 의 경우 query 값이 {파일명 : ['a' , 'b']} 이렇게 들어오게된다.)
 - useRouter()를 활용하여 query 값을 가져올때 첫 렌더링에서는 query 값이 undefined가 들어오게 되기 때문에 구조분해 할당을 따로 해주어 `const {파일명 = []} = router.query`
   이런식으로 초기값을 빈배열로 넘겨주어야 syntax error 가 나오지 않는다.
+
+  <br/>
+  <br/>
+
+### **Navigate**
+
+<hr>
+
+`next에서 제공하는 Link 태그 또는 라우터의 push 를 통해 원하는 페이지로 이동시킬 수 있다.`
+
+#### Link
+
+- Link태그 내부에 `<a>` 태그 사이에 텍스트를 넣어서 링크를 넣어줄 수 있다.
+- Link 태그의 href 속성을 이용하여 원하는 페이지로 이동시킬 수 있다.
+- nesting의 경우 만들어진 페이지는 하나이고 이동되어야 하는페이지가 여러개일때 useRouter를 활용했던 것 처럼 하부페이지로 이동후 그페이지에서 또 이동을 할때는 useRouter의 asPath를 활용하면 현재페이지의 주소를 가져올 수 있기때문에 편리하다.
+- replace 속성의 경우에는 뒤로가기가 되지 않는다(history에서 가야할 페이지를 추가하는게 아니라 현재페이지에다가 가야 할 페이지를 덮어쓴다는 개념 )
+
+#### router
+
+- 버튼이나 특정상황에서 바로 navigation을 시켜야 할 경우에는 const router = useRouter(); router.push('경로') 형식으로 navigating 한다.
+- router.replace('경로')의 경우에는 Link의 replace 속성과 동일하다.
