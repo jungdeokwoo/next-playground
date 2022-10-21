@@ -107,3 +107,15 @@
 - pages 폴더내부에 product라는 폴더를 만들고 index.js파일을 생성하면 /product 페이지에 접근할 수 있다.
 - product 폴더 내부에 [productId]라는 폴더를 만들고 index.js파일을 만들어주면 index.js파일에 해당하는 내용을 /product/[productId]페이지에 나타내어진다.
 - [productId] 폴더 내부에 추가적인 폴더를 만들면 해당폴더내에 [id].js 파일을 작성해주면 /product/[productId]/'폴더명'/[id] 페이지로 접근할 수 있다.
+
+  <br/>
+  <br/>
+
+### **CatchAll Route**
+
+<hr>
+
+- pages 폴더내부에 임의의 폴더를 만들고 그 아래에 [...파일명].js 파일을 만들어주게되면 임의의 폴더명을 포함하는 모든 경로에 접속할 수 있다.(마찬가지로 모든 경로의 화면은 [...파일명].js 내용을 가져온다)
+- [...파일명].js 의 경우 모든 경로에서 useRouter 를 사용해서 페이지 정보를 가져올때 query는 배열값이 들어가게 된다. ('/폴더명/a/b' 의 경우 query 값이 {파일명 : ['a' , 'b']} 이렇게 들어오게된다.)
+- useRouter()를 활용하여 query 값을 가져올때 첫 렌더링에서는 query 값이 undefined가 들어오게 되기 때문에 구조분해 할당을 따로 해주어 `const {파일명 = []} = router.query`
+  이런식으로 초기값을 빈배열로 넘겨주어야 syntax error 가 나오지 않는다.
