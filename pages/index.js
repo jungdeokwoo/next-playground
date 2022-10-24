@@ -24,6 +24,7 @@ export default function Home({ allPostsData }) {
           (This is a sample website - you’ll be building a site like this on{" "}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+        <Link href="/product">go Product</Link>
       </HomeSection>
       <ListSection>
         <HeadingLg>Blog</HeadingLg>
