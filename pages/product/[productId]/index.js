@@ -1,12 +1,18 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ProductDetail from "../../../components/productDetail";
 
 const Index = () => {
+  const [productDetail, setProductDetail] = useState(null);
   const router = useRouter();
-  console.log(router);
 
-  return <div>Product{router.query.productId} Detail</div>;
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/productList/${router.query.productId}`)
+      .then((res) => res.json())
+      .then((res) => setProductDetail(res.Data));
+  }, [router.query.productId]);
+
+  return productDetail && <ProductDetail product={productDetail} />;
 };
 
 export default Index;

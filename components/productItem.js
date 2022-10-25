@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 const ProductItem = ({ productItem }) => {
-  console.log(productItem);
   return (
     <ItemWrapper>
       <BrandTitle>{productItem.brand}</BrandTitle>

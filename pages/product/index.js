@@ -8,12 +8,11 @@ const Index = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/hello")
+    fetch("http://localhost:3000/api/productList")
       .then((response) => response.json())
       .then((json) => setProductList(json.Data));
   }, []);
-  const router = useRouter();
-  console.log(productList);
+
   return (
     <ListWrapper>
       {productList?.map((item) => (
