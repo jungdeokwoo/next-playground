@@ -1,18 +1,28 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import ProductDetail from "../../../components/productDetail";
+import { getProductItem } from "../../../utils/getProductItem";
+import { getProductPath } from "../../../utils/getProductPath";
 
-const Index = () => {
-  const [productDetail, setProductDetail] = useState(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/productList/${router.query.productId}`)
-      .then((res) => res.json())
-      .then((res) => setProductDetail(res.Data));
-  }, [router.query.productId]);
-
-  return productDetail && <ProductDetail product={productDetail} />;
+const Index = ({ productItem }) => {
+  return productItem && <ProductDetail product={productItem} />;
 };
 
 export default Index;
+
+export async function getStaticPaths() {
+  const paths = [
+    { params: { productId: "495" } },
+    { params: { productId: "488" } },
+    { params: { productId: "477" } },
+  ];
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const productItem = await getProductItem(params.productId);
+  return {
+    props: { productItem },
+  };
+}
