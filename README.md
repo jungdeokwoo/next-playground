@@ -80,6 +80,22 @@
 - Server-side Rendering 의 경우 요청이 생길때 Html을 생성해서 보여주는 방식
 - getStaticProps를 통해 현재 preRendering될 페이지에 data dependencies를 주어 우선적으로 데이터를 받아오도록 한다.
 
+#### Static Generation
+
+- static Generation 의 경우 데이터의 변화가 바로바로 일어나져서 보여지는 페이지의 UI가 계속 해서 변해지지 않는 페이지들을 build 시점에 그려내어 사용자가 빠르게 페이지를 확인할 수 있도록 한다.
+- component가 아닌 page 파일에 getstaticProps 함수를 export 해주어 정적페이지를 생성할 수 있다.
+- 외부 데이터를 받아와야하는 경우 fetch 함수를 getStaticProps 함수 내부에서 fetch하여 {prop:{}}형식으로 return 해주게 되면 해당 페이지의 함수 컴포넌트에서 prop으로 받아올 수 있다.
+- 내부 API를 사용하는 경우 개발환경에서는 작동을 하지만 build하여 prod환경에서 작동하려면 build 시점에 오류가 생성되어 build를 할 수 없다.(이유는 찾고있는중..)
+
+  - 빌드시점에 local 서버가 생성되지 않기 때문에 fetch할수 없기때문 (추측)
+  - getStaticProps 자체가 외부데이터만을 이용해서 작동하기 때문 (추측)
+
+- dynamic Route의 경우 미리 페이지를 생성하여 정적페이지를 만들기위해서는 getStaticPaths를 통해 지정된 경로의 페이지를 미리 생성해 둘 수 있다.
+- getStaticPaths 의 경우 {paths:[{params:{`endpoint`: `값(string}`}}]} 형식으로 return 해주어야 하고 값은 항상 string 으로 넘겨주어야 한다.
+- getStaticPaths의 리턴값은 getstaticProps에서 props로 전달받을 수 있다.
+- 정적페이지로 생성된 페이지의 경우 외부데이터를 이용해서(fetch) 페이지를 만들었지만, build시점에만 fetch를 하기때문에 해당페이지를 들어갔을때 외부 데이터 fetch가 이루어지지 않는다.
+- getStaticPaths 의 paths의 배열 endpoint에 속해있지 않는 endpoint의 경로로 이동하였을때 fallback값이 false 일 경우에는 404페이지를 띄우게 되고, true일 경우에는 정적페이지를 생성하듯 페이지를 만들어서 그려주고 난 후에 정적페이지처럼 작동하게 된다.(build된 폴더 내부애 html이 생성된다.)
+
   <br/>
   <br/>
 

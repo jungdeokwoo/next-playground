@@ -1,24 +1,15 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import ProductItem from "../../components/productItem";
 import Link from "next/link";
+import { getProductLists } from "../../utils/getProductLists";
 
-const Index = () => {
-  const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/productList")
-      .then((response) => response.json())
-      .then((json) => setProductList(json.Data));
-  }, []);
-
+const Index = ({ allProductLists }) => {
   return (
     <ListWrapper>
-      {productList?.map((item) => (
-        <Link key={item.id} href={`/product/${item.id}`}>
+      {allProductLists?.map((productItem) => (
+        <Link key={productItem.id} href={`/product/${productItem.id}`}>
           <a>
-            <ProductItem productItem={item} />
+            <ProductItem productItem={productItem} />
           </a>
         </Link>
       ))}
@@ -38,3 +29,10 @@ const ListWrapper = styled.section`
   max-width: 1500px;
   margin: 50px auto;
 `;
+
+export async function getStaticProps() {
+  const allProductLists = await getProductLists();
+  return {
+    props: { allProductLists },
+  };
+}
