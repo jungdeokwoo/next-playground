@@ -1,6 +1,5 @@
 import ProductDetail from "../../../components/productDetail";
 import { getProductItem } from "../../../utils/getProductItem";
-import { getProductPath } from "../../../utils/getProductPath";
 
 const Index = ({ productItem }) => {
   return productItem && <ProductDetail product={productItem} />;
@@ -8,21 +7,13 @@ const Index = ({ productItem }) => {
 
 export default Index;
 
-export async function getStaticPaths() {
-  const paths = [
-    { params: { productId: "495" } },
-    { params: { productId: "488" } },
-    { params: { productId: "477" } },
-  ];
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps(context) {
+  const { params, req, res, query } = context;
+  console.log(req.headers.cookie);
+  console.log("--------------params------------", params);
+  console.log("-------------query-------------", query);
+  res.setHeader("Set-Cookie", ["name=dogsocks"]);
   const productItem = await getProductItem(params.productId);
-  return {
-    props: { productItem },
-  };
+
+  return { props: { productItem: productItem } };
 }
