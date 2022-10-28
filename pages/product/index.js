@@ -3,9 +3,10 @@ import ProductItem from "../../components/productItem";
 import Link from "next/link";
 import { getProductLists } from "../../utils/getProductLists";
 
-const Index = ({ allProductLists }) => {
+const Index = ({ allProductLists, date }) => {
   return (
     <ListWrapper>
+      <p>{date}</p>
       {allProductLists?.map((productItem) => (
         <Link key={productItem.id} href={`/product/${productItem.id}`}>
           <a>
@@ -32,7 +33,9 @@ const ListWrapper = styled.section`
 
 export async function getStaticProps() {
   const allProductLists = await getProductLists();
+  const date = new Date().toLocaleString();
   return {
-    props: { allProductLists },
+    props: { allProductLists, date },
+    revalidate: 10,
   };
 }
