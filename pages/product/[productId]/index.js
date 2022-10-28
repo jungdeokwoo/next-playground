@@ -1,8 +1,15 @@
 import ProductDetail from "../../../components/productDetail";
 import { getProductItem } from "../../../utils/getProductItem";
 
-const Index = ({ productItem }) => {
-  return productItem && <ProductDetail product={productItem} />;
+const Index = ({ productItem, date }) => {
+  return (
+    productItem && (
+      <>
+        <p>{date}</p>
+        <ProductDetail product={productItem} />;
+      </>
+    )
+  );
 };
 
 export default Index;
@@ -14,6 +21,7 @@ export async function getServerSideProps(context) {
   console.log("-------------query-------------", query);
   res.setHeader("Set-Cookie", ["name=dogsocks"]);
   const productItem = await getProductItem(params.productId);
+  const date = new Date().toLocaleString();
 
-  return { props: { productItem: productItem } };
+  return { props: { productItem: productItem, date } };
 }

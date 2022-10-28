@@ -72,7 +72,7 @@
 
 `Next에서는 Static Generation,Server-Side Rendering 두가지 PreRendering 방식을 제공함`
 
-#### preRendering
+#### **preRendering**
 
 - 기존 리엑트의 경우에는 html, js 모두 받아와서 화면에 보여지도록 함 (개발자도구에서 자바스크립트를 disable로 하면 화면이 나타나지 않음)
 - Next의 경우에는 서버에서 html을 받아와서 기본적인 html을 화면에 나타내고 javascript를 추후에 받아오면서 페이지에 적용시킴(hydration)
@@ -82,7 +82,7 @@
 
 <br/>
 
-#### Static Generation
+#### **Static Generation**
 
 - static Generation 의 경우 데이터의 변화가 바로바로 일어나져서 보여지는 페이지의 UI가 계속 해서 변해지지 않는 페이지들을 build 시점에 그려내어 사용자가 빠르게 페이지를 확인할 수 있도록 한다.
 - component가 아닌 page 파일에 getstaticProps 함수를 export 해주어 정적페이지를 생성할 수 있다.
@@ -100,7 +100,7 @@
 
 <br/>
 
-#### Serverside-Rendering
+#### **Serverside-Rendering**
 
 - Next.js에서도 서버사이드 렌더링을 제공해준다.
 - getServersideProps() 를 활용하여 서버사이드 렌더링을 구현할 수 있다.
@@ -108,7 +108,17 @@
 - 외부데이터를 사용하는경우 마찬가지로 getServersideProps 함수 내부에서 fetch를 해오는 방식으로 구현할 수 있으며 return 값으로는 마찬가지로 {props:} 로 넘겨줄 수 있다.
 - 동적라우팅의 경우에는 getServersideProps 의 매개변수로 context를 받아올 수 있으며 context는 params,query,res,req 등 여러가지 키값을 가지는 객체 데이터이다.
 - res.setHeaders('Set-Cookie', 값) 을 통해 쿠키를 저장할 수 있고, req.headers.cookie를 통해 쿠키값을 확인할 수 있다.
-- params는 페이지 경로 ( [`경로`].js 에서의 경로 / `ex) productId/455 에서 params는 455`) query는 엔드포인트의 값들을 객체로 받아올 수 있다. (`ex) productId/455?a=1&b=2 에서 query값은 {productId:'455', a: '1', b:'2'}`
+- params는 페이지 경로 ( [`경로`].js 에서의 경로 / `ex) productId/455 에서 params는 455`) query는 엔드포인트의 값들을 객체로 받아올 수 있다. (`ex) productId/455?a=1&b=2 에서 query값은 {productId:'455', a: '1', b:'2'}`)
+
+`Static generation과 SSR의 비교해보면, 각 페이지에서 new Date()를 활용하여 현재시간을 페이지에 나타내 보았을때 SSG페이지의 경우 빌드한 시점의 시간이 나타나며, 새로고침을 하여도 시간의 변화가 생기지 않는다.`
+
+<br>
+
+`단 getStaticProps의 return 값으로 revalidate를 적용하게 되면 적용한 시간 안에 새로고침을 하면 페이지는 받아온 정보를 계속 보여주지만, 해당 시간이 지나면 다시 서버에서 정보를 받아와서 페이지를 보여주기때문에 시간정보가 변경되어 있다.`
+
+<br>
+
+`SSR의 경우에는 요청마다 서버에서 html을 작성하고 받아오기 때문에 페이지에 접속할때마다 현재시간이 변경되어 나타나게 된다.`
 
   <br/>
   <br/>
