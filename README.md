@@ -80,6 +80,8 @@
 - Server-side Rendering 의 경우 요청이 생길때 Html을 생성해서 보여주는 방식
 - getStaticProps를 통해 현재 preRendering될 페이지에 data dependencies를 주어 우선적으로 데이터를 받아오도록 한다.
 
+<br/>
+
 #### Static Generation
 
 - static Generation 의 경우 데이터의 변화가 바로바로 일어나져서 보여지는 페이지의 UI가 계속 해서 변해지지 않는 페이지들을 build 시점에 그려내어 사용자가 빠르게 페이지를 확인할 수 있도록 한다.
@@ -95,6 +97,18 @@
 - getStaticPaths의 리턴값은 getstaticProps에서 props로 전달받을 수 있다.
 - 정적페이지로 생성된 페이지의 경우 외부데이터를 이용해서(fetch) 페이지를 만들었지만, build시점에만 fetch를 하기때문에 해당페이지를 들어갔을때 외부 데이터 fetch가 이루어지지 않는다.
 - getStaticPaths 의 paths의 배열 endpoint에 속해있지 않는 endpoint의 경로로 이동하였을때 fallback값이 false 일 경우에는 404페이지를 띄우게 되고, true일 경우에는 정적페이지를 생성하듯 페이지를 만들어서 그려주고 난 후에 정적페이지처럼 작동하게 된다.(build된 폴더 내부애 html이 생성된다.)
+
+<br/>
+
+#### Serverside-Rendering
+
+- Next.js에서도 서버사이드 렌더링을 제공해준다.
+- getServersideProps() 를 활용하여 서버사이드 렌더링을 구현할 수 있다.
+- getServersideProps() 를 사용하는 경우 매 요청마다 서버에서 html을 만들어서 넘겨주는 방식으로 렌더링 된다.
+- 외부데이터를 사용하는경우 마찬가지로 getServersideProps 함수 내부에서 fetch를 해오는 방식으로 구현할 수 있으며 return 값으로는 마찬가지로 {props:} 로 넘겨줄 수 있다.
+- 동적라우팅의 경우에는 getServersideProps 의 매개변수로 context를 받아올 수 있으며 context는 params,query,res,req 등 여러가지 키값을 가지는 객체 데이터이다.
+- res.setHeaders('Set-Cookie', 값) 을 통해 쿠키를 저장할 수 있고, req.headers.cookie를 통해 쿠키값을 확인할 수 있다.
+- params는 페이지 경로 ( [`경로`].js 에서의 경로 / `ex) productId/455 에서 params는 455`) query는 엔드포인트의 값들을 객체로 받아올 수 있다. (`ex) productId/455?a=1&b=2 에서 query값은 {productId:'455', a: '1', b:'2'}`
 
   <br/>
   <br/>
