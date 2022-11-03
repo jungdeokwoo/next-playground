@@ -33,9 +33,9 @@ const ListWrapper = styled.section`
 
 export async function getStaticProps() {
   const allProductLists = await getProductLists();
-  const date = new Date().toLocaleString();
+  console.log("regen");
   return {
-    props: { allProductLists, date },
-    // revalidate: 10,
+    props: { allProductLists },
+    revalidate: 20,
   };
 }
