@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { DATA } from "../../../const/productLists";
+import { DATA } from "../../../data/productLists";
 
 export default function handler(req, res) {
   res

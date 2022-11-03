@@ -7,7 +7,12 @@ const ProductDetail = ({ product }) => {
       <DetailTitle>Product Detail</DetailTitle>
       <ProductDetails>
         <ImageWrapper>
-          <Image src={product.image_link} width="400px" height="400px" />
+          <Image
+            src={product.image_link}
+            width="400px"
+            height="400px"
+            alt={`${product.name} image`}
+          />
         </ImageWrapper>
         <ProductDetailWrapper>
           <ProductName>{product.name}</ProductName>

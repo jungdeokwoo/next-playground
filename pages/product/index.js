@@ -32,7 +32,9 @@ const ListWrapper = styled.section`
 
 export async function getStaticProps() {
   const allProductLists = await getProductLists();
+  console.log("regen");
   return {
     props: { allProductLists },
+    revalidate: 20,
   };
 }
