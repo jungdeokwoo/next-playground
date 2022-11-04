@@ -100,6 +100,20 @@
 
 <br/>
 
+#### dynamic-routes
+
+- 같은 경로의 하위페이지(/posts/1, /posts/2)의 경우에는 pages폴더내에 상위경로의 폴더 내부에 [id].js 형식의 파일을 생성하여 라우팅해준다.
+- 마찬가지로 build 시점에 data fetching 이 필요한 경우에는 getStaticProps를 활용하여 build 시점에 데이터를 fetch하여 정적인 페이지를 생성하도록 한다.
+- dynamic-route의 경우에는 getStaticProps와 동적라우팅 페이지에서 getStaticPaths를 활용해서 build시에 static하게 생성할 페이지를 정한다.
+- 개발환경에서는 getStaticPath는 매 요청마다 실행되지만 production(생성)환경에서는 build time에서만 실행된다.
+- getStaticPaths 에 해당하지 않는 경로는 404에러 페이지를 띄워준다
+  - fallback 속성이 false일때는 404에러 페이지를 띄워준다
+  - fallback 속성이 true 일때는 지정된 페이지를 띄워준다.
+- useRouter 을 통해서 해당페이지의 route 정보를 확인 할 수 있다.(`const router = useRouter()`)
+- pages 폴더내에 404.js파일을 생성하면 404에러경우에 이동할 페이지를 편집할 수 있다.
+
+<br>
+
 #### **Serverside-Rendering**
 
 - Next.js에서도 서버사이드 렌더링을 제공해준다.
@@ -123,17 +137,12 @@
   <br/>
   <br/>
 
-#### dynamic-routes
+#### **Incremental Static Regeneration**
 
-- 같은 경로의 하위페이지(/posts/1, /posts/2)의 경우에는 pages폴더내에 상위경로의 폴더 내부에 [id].js 형식의 파일을 생성하여 라우팅해준다.
-- 마찬가지로 build 시점에 data fetching 이 필요한 경우에는 getStaticProps를 활용하여 build 시점에 데이터를 fetch하여 정적인 페이지를 생성하도록 한다.
-- dynamic-route의 경우에는 getStaticProps와 동적라우팅 페이지에서 getStaticPaths를 활용해서 build시에 static하게 생성할 페이지를 정한다.
-- 개발환경에서는 getStaticPath는 매 요청마다 실행되지만 production(생성)환경에서는 build time에서만 실행된다.
-- getStaticPaths 에 해당하지 않는 경로는 404에러 페이지를 띄워준다
-  - fallback 속성이 false일때는 404에러 페이지를 띄워준다
-  - fallback 속성이 true 일때는 지정된 페이지를 띄워준다.
-- useRouter 을 통해서 해당페이지의 route 정보를 확인 할 수 있다.(`const router = useRouter()`)
-- pages 폴더내에 404.js파일을 생성하면 404에러경우에 이동할 페이지를 편집할 수 있다.
+- getStaticProps 의 return 값의 키값으로 revalidate를, 값으로 시간(초) 를 적어주면, 해당 초 이후에 정적페이지가 업데이트가 되게 된다.
+- getStaticProps 로 만들어진 정적페이지는 추후에 서버의 데이터가 변경되어도 변경된값이 생성된 페이지에 적용되지 않는다.(아무리 새로고침을 하여도)
+- revalidate를 10으로 설정하게 된다면 처음 생성된 정적페이지에서 10초후에 새로고침을 하게되면, 바로 화면이 변경되는게 아니라, 설정된 값 이후에 들어오는 요청에 대하여 일단은 기존의 캐쉬된 페이지를 보내주고, 그 후에 새로운 데이터를 받아와서 정적페이지를 새로 만들고 그 새로만든 html을 캐쉬에 저장하여 그 다음 요청부터 새로운 페이지가 보여지게 된다.
+- revalidate의 값은 해당 시간뒤에 바로 변경된 페이지가 보여지기 보다는 해당 시간 후의 요청마다 새로운 정적페이지를 생성하여 캐쉬해둔다 라고 생각하면 될 것 같다.
 
   <br/>
   <br/>
