@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import ProductItem from "../../components/productItem";
-import Link from "next/link";
-import { getProductLists } from "../../utils/getProductLists";
+import styled from 'styled-components'
+import ProductItem from '../../components/productItem'
+import Link from 'next/link'
+import { getProductLists } from '../../utils/getProductLists'
 
 const Index = ({ allProductLists, date }) => {
   return (
     <ListWrapper>
       <p>{date}</p>
-      {allProductLists?.map((productItem) => (
+      {allProductLists?.map(productItem => (
         <Link key={productItem.id} href={`/product/${productItem.id}`}>
           <a>
             <ProductItem productItem={productItem} />
@@ -15,10 +15,10 @@ const Index = ({ allProductLists, date }) => {
         </Link>
       ))}
     </ListWrapper>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index
 
 const ListWrapper = styled.section`
   display: grid;
@@ -29,13 +29,13 @@ const ListWrapper = styled.section`
   justify-items: center;
   max-width: 1500px;
   margin: 50px auto;
-`;
+`
 
 export async function getStaticProps() {
-  const allProductLists = await getProductLists();
-  console.log("regen");
+  const allProductLists = await getProductLists()
+  console.log('regen')
   return {
     props: { allProductLists },
     revalidate: 20,
-  };
+  }
 }
