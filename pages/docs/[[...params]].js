@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 const Docs = () => {
-  const router = useRouter();
-  const { params = [] } = router.query;
-  return <div>{`Documents ${params[0]} & ${params[1]}`}</div>;
-};
+  const router = useRouter()
+  const { params = [] } = router.query
+  return <div>{`Documents ${params[0]} & ${params[1]}`}</div>
+}
 
-export default Docs;
+export default Docs
