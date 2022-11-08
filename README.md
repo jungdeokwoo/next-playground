@@ -189,3 +189,18 @@
 
 - 버튼이나 특정상황에서 바로 navigation을 시켜야 할 경우에는 const router = useRouter(); router.push('경로') 형식으로 navigating 한다.
 - router.replace('경로')의 경우에는 Link의 replace 속성과 동일하다.
+
+<br>
+<br>
+
+### **Shallow route**
+
+<hr>
+
+`useRouter의 route.push에서 option을 shallow:true 를 선택하면 페이지를 리렌더할때 getStaticProps, getServerSideProps 를 작동시키지 않고 페이지를 이동시킨다`
+
+- route.push('경로') 를 통해서 페이지를 이동시킬 경우에 서버에서 만들어진 데이터를 받아와서 화면을 구성하게 된다.
+- 관리자도구의 network 탭에서 확인해보았을때 해당페이지의 레이아웃이 서버에서 만들어진 후 만들어진 페이지를 받아오는 것을 확인할 수 있다.
+- route.push('경로',undefined,{shallow:true}) 의 경우에는 페이지가 이동될때 만들어진 페이지를 받아오는게 아니라 경로만 이동되는 것을 확인할 수 있다.
+- client 에서 데이터를 받아와서 페이지를 만드는 경우가 아니라면, shallow를 true로 하였을 때 경로는 바뀌지만 레이아웃이 바뀌지 않는것을 확인할 수 있다.
+- path를 기준으로 client에서 데이터를 받아와서 화면을 구성할 경우 shallow 속성을 true로 하지 않는다면 fetch가 서버와 클라이언트에서 두번 작동되기 때문에, path를 기준으로 client에서 데이터를 받아서 화면을 구성할 경우에는 shallow 속성을 true로 지정해주는것이 좋다.

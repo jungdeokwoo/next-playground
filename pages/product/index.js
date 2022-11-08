@@ -6,7 +6,6 @@ import { getProductLists } from '../../utils/getProductLists'
 const Index = ({ allProductLists, date }) => {
   return (
     <ListWrapper>
-      <p>{date}</p>
       {allProductLists?.map(productItem => (
         <Link key={productItem.id} href={`/product/${productItem.id}`}>
           <a>
