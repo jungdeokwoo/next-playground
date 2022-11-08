@@ -1,14 +1,28 @@
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import ProductDetail from '../../../components/productDetail'
 import { getProductItem } from '../../../utils/getProductItem'
 
-const Index = ({ productItem, date }) => {
+const Index = ({ productItem }) => {
+  const [productData, setProductData] = useState(productItem)
+  const router = useRouter()
+
+  useEffect(() => {
+    getProductItem(router.query.productId).then(res => setProductData(res))
+  }, [router.query.productId])
+
+  const goPage = async () => {
+    router.push('/product/495', undefined, { shallow: true })
+  }
   return (
-    productItem && (
-      <>
-        <p>{date}</p>
-        <ProductDetail product={productItem} />;
-      </>
-    )
+    <>
+      <button onClick={goPage}>go4495</button>
+      {productData && (
+        <>
+          <ProductDetail product={productData} />;
+        </>
+      )}
+    </>
   )
 }
 
@@ -19,9 +33,7 @@ export async function getServerSideProps(context) {
   console.log(req.headers.cookie)
   console.log('--------------params------------', params)
   console.log('-------------query-------------', query)
-  res.setHeader('Set-Cookie', ['name=dogsocks'])
   const productItem = await getProductItem(params.productId)
-  const date = new Date().toLocaleString()
 
-  return { props: { productItem: productItem, date } }
+  return { props: { productItem: productItem } }
 }
