@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 html,
@@ -22,14 +22,14 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  /* text-decoration: underline; */
-}
+/* a:hover {
+  text-decoration: underline;
+} */
 
 img {
   max-width: 100%;
   display: block;
 }
-`;
+`
 
-export default GlobalStyles;
+export default GlobalStyles

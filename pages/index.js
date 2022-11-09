@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
+import Layout, { siteTitle } from '../components/Layout'
 import styled from 'styled-components'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
