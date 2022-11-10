@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import ProductDetail from '../../../components/productDetail'
@@ -16,6 +17,13 @@ const Index = ({ productItem }) => {
   }
   return (
     <>
+      <Head>
+        <title>{productItem.name}</title>
+        <meta
+          name="description"
+          content={`information of ${productItem.name}`}
+        />
+      </Head>
       <button onClick={goPage}>go4495</button>
       {productData && (
         <>
