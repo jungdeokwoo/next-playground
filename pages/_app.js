@@ -1,6 +1,5 @@
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 import GlobalStyles from '../styles/_GlobalStyles'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   if (Component.getLayout) {
@@ -11,6 +10,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title>넥스트 연습</title>
+        <meta name="description" content="넥스트 연습해보기" />
+      </Head>
       <GlobalStyles />
       <Component {...pageProps} />
     </>
