@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import ProductItem from '../../components/productItem'
+import ProductItem from 'components/productItem'
 import Link from 'next/link'
-import { getProductLists } from '../../utils/getProductLists'
+import { getProductLists } from 'utils/getProductLists'
 
 const Index = ({ allProductLists, date }) => {
   return (
