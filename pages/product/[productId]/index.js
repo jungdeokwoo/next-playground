@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import ProductDetail from '../../../components/productDetail'
-import { getProductItem } from '../../../utils/getProductItem'
+import ProductDetail from 'components/productDetail'
+import { getProductItem } from 'utils/getProductItem'
 
 const Index = ({ productItem }) => {
   const [productData, setProductData] = useState(productItem)

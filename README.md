@@ -217,3 +217,16 @@
 - "app.js" 에서 head 컴포넌트를 작성하면 전체 페이지가 app.js의 head 를 공통적으로 공유하게 된다.
 - 특정페이지의 head를 따로 작성해준다면, 그 특정페이지의 head만 변경되어 나타내어진다(app.js의 head보다 우선시됨)
 - 정적생성페이지, 서버사이드렌더링 페이지의 경우에는 SSG,SSR의 받아온 props의 데이터를 활용해서 head를 작성해 줄 수 있기때문에 SEO에 유리하다.
+
+<br>
+<br>
+
+### **절대경로**
+
+<hr>
+
+`타입스크립트를 사용하는 경우에는 tsconfig.json을, 타입스크립트를 사용하지 않는 경우에는 root 폴더에 jsconfig.json파일을 만들어서 절대경로를 적용해준다.`
+
+- jsconfig.json 파일을 생성하여 compileoption, baseUrl값을 '.' 로 하게되면 경로의 절대값이 root폴더가 된다.
+- paths 에 @/경로파일/_ : [ 경로파일/_ ] 로 해주게 되면 경로파일/ 에 해당하는 모든 경로들은 @/경로파일 로 작성해줄 수 있다.
+  - "@/layout/_" : [ "component/layout/_" ] 의 경우에 component/layout 을 거치는 경로들은 모두 @/layout 으로 대체할 수 있다.
