@@ -3,6 +3,7 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const About = () => {
   const router = useRouter()
@@ -37,6 +38,10 @@ const AboutTitle = styled.h1`
 About.getLayout = function getLayout(page) {
   return (
     <>
+      <Head>
+        <title>AboutPage</title>
+      </Head>
+      <Header />
       {page}
       <Footer />
     </>

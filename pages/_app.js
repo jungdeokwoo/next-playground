@@ -1,5 +1,6 @@
 import GlobalStyles from 'styles/_GlobalStyles'
 import Head from 'next/head'
+import Header from 'components/Header'
 
 function MyApp({ Component, pageProps }) {
   if (Component.getLayout) {
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="넥스트 연습해보기" />
       </Head>
       <GlobalStyles />
+      <Header />
       <Component {...pageProps} />
     </>
   )
