@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Header from 'components/Header'
 import { useEffect } from 'react'
+import Footer from 'components/Footer'
+import Head from 'next/head'
 
 const Contact = props => {
   // useEffect(() => {
@@ -33,8 +35,12 @@ export async function getStaticProps(context) {
 Contact.getLayout = function getLayout(page) {
   return (
     <>
+      <Head>
+        <title>Contact Page</title>
+      </Head>
       <Header />
       {page}
+      <Footer />
     </>
   )
 }

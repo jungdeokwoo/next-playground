@@ -230,3 +230,29 @@
 - jsconfig.json 파일을 생성하여 compileoption, baseUrl값을 '.' 로 하게되면 경로의 절대값이 root폴더가 된다.
 - paths 에 @/경로파일/_ : [ 경로파일/_ ] 로 해주게 되면 경로파일/ 에 해당하는 모든 경로들은 @/경로파일 로 작성해줄 수 있다.
   - "@/layout/_" : [ "component/layout/_" ] 의 경우에 component/layout 을 거치는 경로들은 모두 @/layout 으로 대체할 수 있다.
+
+### **Preview Data**
+
+<hr>
+
+`previewMode인 상태(setPreivewData 응답을 받은 뒤로, preview cookies가 설정이 되어있을때)로 getStaticProps가 있는 페이지를 request하면 getStaticProps는 request time에 호출이 된다.`
+
+- Next.js api 에서 res 에 setPreviewData() 에 값을 주게되면, 해당경로의 api 호출 시 cookie에 **next_preview_data // **prerender_bypass 의 값이 담겨져 온다.
+- previewMode인 상태의 data Fetching 에서 getStaticProps의 context로 preview, previewData 두 값이 담겨져서 들어온다.
+- 추측) 쿠키에 두가지의 키 **next_preview_data // **prerender_bypass 가 존재할 경우에는 preview가 생성되어 preview 페이지를 보여주게 된다.
+  - 예를들자면 about 과 contact 페이지에서, about에 버튼을 만들어 setPreviewData() 가 존재하는 fetch를 get 하는 버튼을 만들고 contact 페이지에서는 preview 모드의 참,거짓에 따라 다른 글자를 보여준다고 하였을때 그냥 contact에 접근하게 되면 preview모드가 거짓일때의 텍스트가 나오다가 about 페이지에서 버튼을 눌러보면 cookie 에 두가지 키값이 추가되고, network탭을 확인해보았을때 contact 페이지 html이 받아져온게 확인되어진다.
+  - 따라서 쿠키를 확인하여 쿠키의 값에 따라 previewMode 가 작동의 여부가 결정되는 것 같다.
+
+<br>
+<br>
+
+### **Next Auth**
+
+<hr>
+
+`next-auth 라이브러리를 이용한 auth 관련 처리방식`
+
+- 기본적으로는 auth를 설치 후 api 폴더에 nextauth로 catchall route 를 만들어 준 후 그 안에 NextAuth를 import 해 온 후 default로 export 해 주는 방식으로 OAuth를 활용할 수 있다.
+- Next-auth 에는 기본적으로 소셜 로그인을 제공해주며, NextAuth 안에서 해당 소셜로그인 정보를 넣어주어 OAuth 방식으로 로그인을 진행할 수 있다.
+- 기본적으로는 Link를 통해 "basicPath'/api/auth/signin" 또는 "basicPath'/api/auth/signout" 으로 접근하여 로그인이 진행된다.
+- 페이지를 이동하지 않는 방식으로는 로그인 또는 로그아웃 페이지에서 signIn, signOut 함수를 import 해온 후 함수 내부에 해당 소셜로그인의 이름을 넣어주면 된다 ex)signIn('github')
