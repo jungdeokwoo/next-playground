@@ -1,10 +1,15 @@
 import GlobalStyles from 'styles/_GlobalStyles'
 import Head from 'next/head'
 import Header from 'components/Header'
+import { SessionProvider } from 'next-auth/react'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
-    return Component.getLayout(<Component {...pageProps} />)
+    return Component.getLayout(
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>,
+    )
   }
 
   // const getLayout = Component.getLayout ?? (page => page)
@@ -17,7 +22,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <GlobalStyles />
       <Header />
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   )
 }

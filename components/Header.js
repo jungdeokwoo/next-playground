@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 const Header = () => {
   const router = useRouter()
   const signInHandler = () => {
-    signIn('github')
+    signIn()
   }
 
   const signOutHandler = () => {
