@@ -15,15 +15,17 @@ const USER = [
 export const authOptions = {
   providers: [
     GitHubProvider({
+      id: 'githubLogin',
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
     CredentialsProvider({
+      id: 'creditLogin',
       name: 'Credentials',
-      credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
-        password: { label: 'Password', type: 'password' },
-      },
+      // credentials: {
+      //   username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+      //   password: { label: 'Password', type: 'password' },
+      // },
       async authorize(credentials, req) {
         const user = USER.filter(
           el =>

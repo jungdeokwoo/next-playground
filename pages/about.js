@@ -58,7 +58,6 @@ About.getLayout = function getLayout(page) {
       <Head>
         <title>AboutPage</title>
       </Head>
-      <Header />
       {page}
       <Footer />
     </>

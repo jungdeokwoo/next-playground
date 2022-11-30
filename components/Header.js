@@ -1,16 +1,17 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import { signIn, signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 const Header = () => {
   const router = useRouter()
-  const signInHandler = () => {
-    signIn()
-  }
+  const session = useSession()
+
+  console.log(session)
 
   const signOutHandler = () => {
-    signOut('github')
+    signOut()
+    // signOut({ callbackUrl: 'http://localhost:3000/contact' })
   }
 
   return (
@@ -32,8 +33,14 @@ const Header = () => {
             <a>product</a>
           </Link>
         </Listitem>
-        <Listitem onClick={signInHandler}>SignIn</Listitem>
-        <Listitem onClick={signOutHandler}>Signout</Listitem>
+        {!session.data && (
+          <Listitem>
+            <Link href="/login">
+              <a>SignIn</a>
+            </Link>
+          </Listitem>
+        )}
+        {session.data && <Listitem onClick={signOutHandler}>Signout</Listitem>}
       </NavList>
     </HeaderTitle>
   )

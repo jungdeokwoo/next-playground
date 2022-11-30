@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
     return Component.getLayout(
       <SessionProvider session={session}>
+        <Header />
         <Component {...pageProps} />
       </SessionProvider>,
     )
@@ -21,8 +22,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <meta name="description" content="넥스트 연습해보기" />
       </Head>
       <GlobalStyles />
-      <Header />
       <SessionProvider session={session}>
+        <Header />
         <Component {...pageProps} />
       </SessionProvider>
     </>
