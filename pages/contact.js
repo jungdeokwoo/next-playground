@@ -38,7 +38,6 @@ Contact.getLayout = function getLayout(page) {
       <Head>
         <title>Contact Page</title>
       </Head>
-      <Header />
       {page}
       <Footer />
     </>
