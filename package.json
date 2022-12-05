@@ -10,6 +10,8 @@
     "serve-json": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.19.1",
+    "@tanstack/react-query-devtools": "^4.19.1",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
     "json-server": "^0.17.1",

@@ -40,7 +40,7 @@ export const authOptions = {
             image: user.image,
           }
         } else {
-          return null
+          return 'hi'
         }
       },
     }),
