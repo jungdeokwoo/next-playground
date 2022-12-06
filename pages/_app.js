@@ -2,13 +2,26 @@ import GlobalStyles from 'styles/_GlobalStyles'
 import Head from 'next/head'
 import Header from 'components/Header'
 import { SessionProvider } from 'next-auth/react'
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  const queryClient = new QueryClient()
+
   if (Component.getLayout) {
     return Component.getLayout(
       <SessionProvider session={session}>
-        <Header />
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Header />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen />
+          </Hydrate>
+        </QueryClientProvider>
       </SessionProvider>,
     )
   }
@@ -23,8 +36,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       </Head>
       <GlobalStyles />
       <SessionProvider session={session}>
-        <Header />
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Header />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen />
+          </Hydrate>
+        </QueryClientProvider>
       </SessionProvider>
     </>
   )
