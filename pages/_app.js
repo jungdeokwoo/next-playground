@@ -37,9 +37,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <GlobalStyles />
       <SessionProvider session={session}>
         <QueryClientProvider client={queryClient}>
-          <Header />
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Header />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen />
+          </Hydrate>
         </QueryClientProvider>
       </SessionProvider>
     </>

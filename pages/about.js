@@ -18,7 +18,7 @@ const About = ({ data }) => {
   console.log(queryClient)
   const query = useQuery(['about', count], () => getProductItem(count), {
     refetchOnWindowFocus: false,
-    // staleTime: 20000,
+    staleTime: 20000,
     initialData: async () => {
       const initialData = await getProductLists()
       console.log(initialData)
